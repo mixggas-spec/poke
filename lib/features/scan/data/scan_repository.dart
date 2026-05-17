@@ -93,7 +93,7 @@ class ScanRepository {
       final byNumber = await _client
           .from('pokemon_catalog')
           .select(
-            'id, pokedex_number, name, image_url, type_1, type_2',
+            'id, pokedex_number, name, description, image_url, type_1, type_2',
           )
           .eq('pokedex_number', pokedexNumber)
           .maybeSingle();
@@ -106,7 +106,7 @@ class ScanRepository {
       final byName = await _client
           .from('pokemon_catalog')
           .select(
-            'id, pokedex_number, name, image_url, type_1, type_2',
+            'id, pokedex_number, name, description, image_url, type_1, type_2',
           )
           .ilike('name', name.trim())
           .limit(1)
@@ -125,9 +125,26 @@ class ScanRepository {
       pokedexNumber: row['pokedex_number'] as int,
       name: row['name'] as String,
       imageUrl: row['image_url'] as String?,
+      description: row['description'] as String?,
       type1: row['type_1'] as String?,
       type2: row['type_2'] as String?,
     );
+  }
+
+  Future<PokemonSummary?> fetchPokemonById(String pokemonId) async {
+    final row = await _client
+        .from('pokemon_catalog')
+        .select(
+          'id, pokedex_number, name, description, image_url, type_1, type_2',
+        )
+        .eq('id', pokemonId)
+        .maybeSingle();
+
+    if (row == null) {
+      return null;
+    }
+
+    return _mapCatalogRow(row);
   }
 
   Future<DiscoveryOutcome> confirmDiscovery(PokemonSummary pokemon) async {

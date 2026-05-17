@@ -7,6 +7,7 @@ import '../../features/auth/presentation/register_screen.dart';
 import '../../features/auth/presentation/splash_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/placeholder/presentation/placeholder_screen.dart';
+import '../../features/discovery/presentation/new_discovery_screen.dart';
 import '../../features/scan/presentation/camera_screen.dart';
 import '../../features/scan/presentation/scan_result_screen.dart';
 import '../providers/auth_state_provider.dart';
@@ -72,8 +73,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/new-discovery',
-        builder: (context, state) =>
-            const PlaceholderScreen(label: 'New Discovery'),
+        builder: (context, state) => const NewDiscoveryScreen(),
       ),
       GoRoute(
         path: '/pokedex-index',

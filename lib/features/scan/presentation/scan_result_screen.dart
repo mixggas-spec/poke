@@ -134,7 +134,14 @@ class _ScanResultScreenState extends ConsumerState<ScanResultScreen> {
       refreshHomeData(ref);
 
       if (outcome.type == DiscoveryOutcomeType.newDiscovery) {
-        setNewDiscoveryPokemon(ref, outcome.pokemon);
+        final fullPokemon = await ref
+                .read(scanRepositoryProvider)
+                .fetchPokemonById(outcome.pokemon.id) ??
+            outcome.pokemon;
+        if (!mounted) {
+          return;
+        }
+        setNewDiscoveryPokemon(ref, fullPokemon);
         clearScanSession(ref);
         context.go('/new-discovery');
         return;
