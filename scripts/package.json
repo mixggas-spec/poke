@@ -1,0 +1,13 @@
+{
+  "name": "pokedex-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "import-pokemon": "node --env-file=.env import_pokemon.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0"
+  }
+}
