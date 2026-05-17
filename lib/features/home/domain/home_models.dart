@@ -4,6 +4,7 @@ class PokemonSummary {
     required this.pokedexNumber,
     required this.name,
     this.imageUrl,
+    this.description,
     this.type1,
     this.type2,
   });
@@ -12,6 +13,7 @@ class PokemonSummary {
   final int pokedexNumber;
   final String name;
   final String? imageUrl;
+  final String? description;
   final String? type1;
   final String? type2;
 }

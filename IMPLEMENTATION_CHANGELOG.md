@@ -302,3 +302,33 @@
   - Edge Function must be deployed with `OLLAMA_MODEL_NAME` for live identification.
   - Camera not testable in unit/widget tests; permission edge cases need device verification.
 - Next recommended step: Execute Prompt 8 — New Discovery screen.
+
+## Entry 2026-05-17 (Prompt 8)
+
+- Task: New Discovery screen
+- Summary: Implemented a celebratory `/new-discovery` screen that reads Pokémon data from `newDiscoveryPokemonProvider` (set after a new scan confirmation). Uses `flutter_animate` for staged reveal animations and refreshes Home when the user taps Continue.
+- Files changed:
+  - `lib/features/discovery/presentation/new_discovery_screen.dart`
+  - `lib/features/home/domain/home_models.dart`
+  - `lib/features/scan/data/scan_repository.dart`
+  - `lib/features/scan/presentation/scan_result_screen.dart`
+  - `lib/core/router/app_router.dart`
+  - `IMPLEMENTATION_CHANGELOG.md`
+- Packages added: None.
+- Packages removed: None.
+- API / Edge Function changes: None.
+- UI changes:
+  - Dark background (#202628) with pulsing radial cyan/blue energy background (fade loop + shimmer).
+  - Header “NEW POKÉMON DISCOVERED!” with cyan glow shadow (fade + slide down, 450ms).
+  - Large official artwork: fade + scale 0.5→1.0 with easeOutBack (550–650ms, 200ms delay).
+  - Row: dex number left, type badges right (fade + slide up, 600ms delay).
+  - Name: bold centered (fade + slide up, 750ms delay).
+  - Description: scrollable body text (fade in, 900ms delay).
+  - Red Continue button (#b83830) (fade + slide up, 1100ms delay).
+- Database changes: None (display only). `fetchPokemonById` loads `description` from `pokemon_catalog` before navigation.
+- Testing performed:
+  - `flutter analyze` — no issues after `use_build_context_synchronously` fix.
+  - `flutter test` — passes.
+  - Manual tests recommended: confirm new discovery after scan → correct name, number, artwork, description; verify animation sequence; Continue → Home counter/panel updated.
+- Open issues: None noted in code review.
+- Next recommended step: Execute Prompt 9 — Pokédex Index screen + Pokémon Detail.
